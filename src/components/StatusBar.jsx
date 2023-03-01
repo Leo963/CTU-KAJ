@@ -7,7 +7,7 @@ export default function StatusBar() {
         <div id="status-bar">
             <div id="status-indicator" className={online ? "online" : ""}></div>
             <div id="lod">
-                <input type="radio" checked name="lod" id="basic"/>
+                <input type="radio" defaultChecked name="lod" id="basic"/>
                 <label htmlFor="basic">Basic</label>
                 <input type="radio" name="lod" id="advanced"/>
                 <label htmlFor="advanced">Advanced</label>

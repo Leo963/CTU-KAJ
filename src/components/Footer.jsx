@@ -5,9 +5,9 @@ export default function Footer() {
         <nav>
             <div></div>
             <section id="location-list">
-                <img src="public/right-arrow.svg" id="prev"/>
+                <img src="src/assets/right-arrow.svg" id="prev"/>
                 <div id="locations"></div>
-                <img src="public/right-arrow.svg" id="next"/>
+                <img src="src/assets/right-arrow.svg" id="next"/>
             </section>
             <button>List locations</button>
         </nav>

@@ -1,73 +1,13 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
-	<meta charset="utf-8">
-	<title>Weather App</title>
-	<meta name="description" content="A weather app for your location">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<meta property="og:title" content="Weather App">
-	<meta property="og:type" content="website">
-	<meta property="og:url" content="suny.fireup.studio">
-
-	<link rel="icon" href="img/Sun.png">
-
-	<link rel="stylesheet" href="css/core.css">
-	<meta name="theme-color" content="#0f1a20">
-
-	<script src="js/core.js" type="application/javascript"></script>
-</head>
-
-<body>
-<div id="wrapper">
-	<header>
-		<h1 id="Location">Prague, Czech republic</h1>
-		<h3 id="dateAndTime">11:35, 8. November 2023</h3>
-	</header>
-	<article>
-		<div id="status-bar">
-			<div id="status-indicator" class="online"></div>
-			<div id="lod">
-				<input type="radio" checked name="lod" id="basic"/>
-				<label for="basic">Basic</label>
-				<input type="radio" name="lod" id="advanced"/>
-				<label for="advanced">Advanced</label>
-			</div>
-		</div>
-		<h2>Feels like: 15°C</h2>
-		<section id="top-info">
-			<div id="extra">
-				<p>Temperature: 17°C</p>
-				<p>Wind: 2 m/s SW</p>
-			</div>
-			<div id="sun">
-				<span id="rise"><img src="img/Sunrise.svg" alt="sunrise icon">7:40</span>
-				<span id="set"><img src="img/Sundown.svg" alt="sundown icon">18:25</span>
-			</div>
-		</section>
-		<section id="hourly">
-			<div id="above">
-				<section id="time"></section>
-				<section id="icons"></section>
-			</div>
-			<div id="graph"></div>
-			<div id="below">
-				<section id="temps"></section>
-				<section id="winds"></section>
-			</div>
-		</section>
-		<section id="daily"></section>
-	</article>
-	<nav>
-		<div></div>
-		<section id="location-list">
-			<img src="img/right-arrow.svg" id="prev"/>
-			<div id="locations"></div>
-			<img src="img/right-arrow.svg" id="next"/>
-		</section>
-		<button>List locations</button>
-	</nav>
-</div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>

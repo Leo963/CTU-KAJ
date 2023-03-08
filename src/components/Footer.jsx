@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 export default function Footer() {
     return (
@@ -9,7 +10,7 @@ export default function Footer() {
                 <div id="locations"></div>
                 <img src="src/assets/right-arrow.svg" id="next"/>
             </section>
-            <button>List locations</button>
+            <Link to={"/locations"}>List locations</Link>
         </nav>
         )
 }

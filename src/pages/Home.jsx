@@ -11,10 +11,24 @@ let weather = {
 		windSpeed: 5
 	}
 }
+
+const options = {
+	year: "numeric",
+	month: "long",
+	day: "numeric"
+};
+
+const timeOptions = {
+	hour: "numeric",
+	minute: "numeric",
+	hour12: false
+}
+
+const locale = navigator.language;
 export default function HomePage() {
 	return (
 		<div id="wrapper">
-			<Header/>
+			<Header location={"Prague, Czech republic"} time={new Intl.DateTimeFormat(locale, timeOptions).format(new Date())} date={new Intl.DateTimeFormat(locale, options).format(new Date())}/>
 			<Core mainInfo={weather.mainInfo} feelsLike={weather.feelsLike}/>
 			<Footer/>
 		</div>

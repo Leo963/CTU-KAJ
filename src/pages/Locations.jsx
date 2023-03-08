@@ -1,8 +1,10 @@
 import React from "react";
+import LocationsList from "../components/LocationsList.jsx";
+
 export default function Locations() {
     return (
-        <>
-            <p>This is your awesome User Profile page</p>
-        </>
+        <div id="wrapper">
+            <LocationsList />
+        </div>
     );
 }

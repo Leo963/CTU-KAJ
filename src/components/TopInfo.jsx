@@ -1,10 +1,10 @@
 import React from 'react'
-export default function TopInfo(props) {
+export default function TopInfo({mainInfo}) {
     return (
         <section id="top-info">
             <div id="extra">
-                <p>Temperature: {props.mainInfo.temperature}°C</p>
-                <p>Wind: {props.mainInfo.windSpeed} m/s SW</p>
+                <p>Temperature: {mainInfo.temperature}°C</p>
+                <p>Wind: {mainInfo.windSpeed} m/s SW</p>
             </div>
             <div id="sun">
                 <span id="rise"><img src="src/assets/Sunrise.svg" alt="sunrise icon"/>7:40</span>

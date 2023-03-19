@@ -1,4 +1,3 @@
-// src/contexts/WeatherContext.js
 import { createContext, useState, useEffect } from "react";
 
 const WeatherContext = createContext();

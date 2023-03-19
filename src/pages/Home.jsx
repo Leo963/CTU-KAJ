@@ -4,11 +4,12 @@ import Footer from "../components/Footer.jsx";
 import Core from "../components/Core.jsx";
 import "../styles/core.css";
 import WeatherContext from "../components/WeatherContext.jsx";
+import useFavicon from "../hooks/useFavicon.js";
 
 export default function HomePage() {
 
 	const { weatherData, loading, readableLocation } = useContext(WeatherContext)
-
+	useFavicon(weatherData)
 	if (loading) {
 		return <div>Loading weather data...</div>;
 	}

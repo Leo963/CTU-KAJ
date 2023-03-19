@@ -15,15 +15,20 @@ const timeOptions = {
 
 const locale = navigator.language;
 
+const regionNames = new Intl.DisplayNames([locale], { type: 'region' });
+
 const ConfigContext = createContext({
 	dateOptions,
 	timeOptions,
 	locale,
+	regionNames,
 });
+
+
 
 export function ConfigProvider({ children }) {
 	return (
-		<ConfigContext.Provider value={{ dateOptions, timeOptions, locale }}>
+		<ConfigContext.Provider value={{ dateOptions, timeOptions, locale, regionNames }}>
 			{children}
 		</ConfigContext.Provider>
 	);

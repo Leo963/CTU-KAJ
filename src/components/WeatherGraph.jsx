@@ -8,6 +8,7 @@ import {
 	Title,
 	Tooltip,
 	Legend,
+	Filler
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 
@@ -19,6 +20,7 @@ ChartJS.register(
 	Title,
 	Tooltip,
 	Legend,
+	Filler
 )
 
 export default function WeatherGraph() {
@@ -32,7 +34,7 @@ export default function WeatherGraph() {
 				backgroundColor: "rgba(0, 0, 255, 0.8)",
 				fill: {
 					target: "start",
-					below: "rgba(0, 0, 255, 0.8)",
+					below: "rgba(0, 0, 255, 0.2)",
 				},
 				tension: 0.2,
 			}]

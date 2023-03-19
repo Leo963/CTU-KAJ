@@ -47,18 +47,22 @@ div#status-indicator {
 	margin-top: 10px;
 	height: 46px;
 	width: 90px;
-	background-color: red;
+	background-color: rgba(0,0,0,1);
 	border-radius: 24px;
 	transition: ease-in-out 1s;
 
 }
-div#status-indicator:after {
+div#status-indicator.offline:after {
 	content: "OFFLINE";
 	color: white;
 	font-weight: bold;
 	align-self: center;
 	justify-self: center;
 	transition-delay: 0.25s;
+}
+
+div#status-indicator.offline {
+	background-color: red;
 }
 
 div#status-indicator.online {

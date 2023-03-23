@@ -9,8 +9,6 @@ export function WeatherProvider({ children }) {
 	const [favoriteLocations, setFavoriteLocations] = useState([]);
 	const [loading, setLoading] = useState(true);
 
-	const apiKey = ""
-
 	useEffect(() => {
 		getCurrentLocation();
 	}, []);
@@ -35,7 +33,7 @@ export function WeatherProvider({ children }) {
 	async function fetchReadableLocation(location) {
 		try {
 			const response = await fetch(
-				`http://api.openweathermap.org/geo/1.0/reverse?lat=${location.lat}&lon=${location.lon}&appid=${apiKey}`
+				`https://weather-proxy.fireup.studio/geolocation?lat=${location.lat}&lon=${location.lon}`
 			);
 			const data = await response.json();
 			setReadableLocation(data)
@@ -60,7 +58,7 @@ export function WeatherProvider({ children }) {
 		setLoading(true);
 		try {
 			const response = await fetch(
-				`https://api.openweathermap.org/data/3.0/onecall?lat=${location.lat}&lon=${location.lon}&appid=${apiKey}&units=metric`
+				`https://weather-proxy.fireup.studio/weather?lat=${location.lat}&lon=${location.lon}&appid=${apiKey}&units=metric`
 			);
 			const data = await response.json();
 			console.log(data)

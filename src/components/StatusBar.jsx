@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export default function StatusBar() {
+export default function StatusBar({isAdvancedMode, setIsAdvancedMode}) {
 	const [online, setOnline] = useState(navigator.onLine);
 
 	useEffect(() => {
@@ -16,13 +16,22 @@ export default function StatusBar() {
 		};
 	}, []);
 
+	const handleBasicClick = () => {
+		setIsAdvancedMode(false);
+	};
+
+	const handleAdvancedClick = () => {
+		setIsAdvancedMode(true);
+	};
+
+
 	return (
 		<div id="status-bar">
 			<div id="status-indicator" className={online ? "online" : "offline"}></div>
 			<div id="lod">
-				<input type="radio" defaultChecked name="lod" id="basic" />
+				<input type="radio" checked={!isAdvancedMode} name="lod" id="basic" onChange={handleBasicClick}/>
 				<label htmlFor="basic">Basic</label>
-				<input type="radio" name="lod" id="advanced" />
+				<input type="radio" checked={isAdvancedMode} name="lod" id="advanced" onChange={handleAdvancedClick} />
 				<label htmlFor="advanced">Advanced</label>
 			</div>
 		</div>

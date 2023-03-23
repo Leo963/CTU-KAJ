@@ -16,7 +16,7 @@ export default function HomePage() {
 	return (
 		<div id="wrapper">
 			<Header location={readableLocation[0]}/>
-			<Core mainInfo={weatherData.current}/>
+			<Core mainInfo={weatherData.current} hourly={weatherData.hourly} daily={weatherData.daily}/>
 			<Footer/>
 		</div>
 	);

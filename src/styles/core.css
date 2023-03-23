@@ -30,6 +30,17 @@ header {
 	padding: 10px 40px;
 }
 
+header > h1 {
+	font-size: 30pt;
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+section#top-info {
+	height: auto;
+	transition: height 0.3s ease;
+}
+
 article {
 	background-color: var(--main-background);
 	color: white;
@@ -119,11 +130,30 @@ article > h2 {
 
 div#extra {
 	display: flex;
+	flex-wrap: wrap;
 }
 
-div#extra > p {
+#advanced-info {
+	display: flex;
+	opacity: 0;
+	height: 0;
+	overflow: hidden;
+	transition: opacity 0.5s ease, height 0.5s ease;
+}
+
+#advanced-info.show-advanced {
+	opacity: 1;
+	height: auto;
+}
+
+div#extra > p, div#advanced-info > p {
 	margin-right: 15px;
 	margin-top: 5px;
+}
+
+.break {
+	flex-basis: 100%;
+	height: 0;
 }
 
 span#rise, span#set {
@@ -143,7 +173,8 @@ div#sun	{
 
 section#hourly {
 	margin: 0 -50px;
-	min-height: 400px;
+	padding: 0 25px;
+	min-height: 100px;
 	background-color: var(--hourly-background);
 }
 
@@ -153,7 +184,7 @@ nav {
 	position: sticky;
 	bottom: 0;
 	background-color: var(--nav);
-	height: 100px;
+	height: 85px;
 }
 
 section#location-list {
@@ -165,7 +196,7 @@ section#location-list {
 section#location-list > img {
 	cursor: pointer;
 	width: 100%;
-	max-height: 100px;
+	max-height: 65px;
 }
 
 div#locations {
@@ -178,4 +209,34 @@ img#prev {
 
 section#daily {
 	min-height: 250px;
+	display: flex;
+	justify-content: space-between;
+	text-align: center;
+}
+
+section#time, section#icons, section#temps, section#winds {
+	display: flex;
+	align-content: space-between;
+	justify-content: space-between;
+}
+
+a.location-list-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+a.location-list-btn > svg {
+	width: 60px;
+	fill: var(--main-background);
+}
+
+.location-list-btn .hamburger-icon {
+	transition: 0.4s ease;
+}
+
+.location-list-btn:hover .hamburger-icon {
+	transition: 0.4s ease;
+	transform: scale(1.1);
+	fill: blue;
 }

@@ -23,13 +23,12 @@ ChartJS.register(
 	Filler
 )
 
-export default function WeatherGraph() {
+export default function WeatherGraph({rain}) {
 	let data = {
 		labels: ["12:00 AM", "3:00 AM", "6:00 AM", "9:00 AM", "12:00 PM", "3:00 PM", "6:00 PM", "9:00 PM"],
 		datasets: [
 			{
-				label: "precipitation",
-				data: [10, 20, 20, 10, 0, 0, 0],
+				data: rain.map(data => data.rain && data.rain['1h'] ? data.rain['1h'] : 0),
 				borderColor: "rgba(0, 0, 255, 1)",
 				backgroundColor: "rgba(0, 0, 255, 0.8)",
 				fill: {
@@ -41,11 +40,38 @@ export default function WeatherGraph() {
 
 	};
 	let options = {
-		options: {
-			bezierCurve: true,
-			legend: false
+		plugins: {
+			legend: {
+				display: false
+			},
+			title: {
+				display: false
+			},
+		},
+		scales: {
+			x: {
+				display: false,
+				grid: {
+					display: true,
+					drawBorder: false
+				}
+			},
+			y: {
+				display: false,
+				beginAtZero: true,
+				grid: {
+					display: true,
+					drawBorder: false
+				}
+			}
+		},
+		elements: {
+			point: {
+				radius: 0
+			}
 		}
 	};
+
 	return (
         <Line data={data} options={options} />
     )

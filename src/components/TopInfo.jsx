@@ -1,7 +1,7 @@
 import React, {useContext} from 'react'
 import ConfigContext from "./ConfigContext.jsx";
 
-function windDegreesToDirection(degrees) {
+export function windDegreesToDirection(degrees) {
 	const compassPoints = [
 		{ min: 348.75, max: 11.25, direction: "N" },
 		{ min: 11.25, max: 33.75, direction: "NNE" },
@@ -28,15 +28,23 @@ function windDegreesToDirection(degrees) {
 	return compassPoint ? compassPoint.direction : "N";
 }
 
-
-export default function TopInfo({mainInfo}) {
+export default function TopInfo({mainInfo, isAdvancedMode}) {
 	const {timeOptions, locale} = useContext(ConfigContext)
     return (
         <section id="top-info">
-            <div id="extra">
-                <p>Temperature: {mainInfo.temp}°C</p>
-                <p>Wind: {mainInfo.wind_speed} m/s {windDegreesToDirection(mainInfo.wind_deg)}</p>
-            </div>
+			<div id="extra">
+				<p>Temperature: {mainInfo.temp}°C</p>
+				<p>
+					Wind: {mainInfo.wind_speed} m/s{" "}
+					{windDegreesToDirection(mainInfo.wind_deg)}
+				</p>
+				<div className="break"></div>
+				<div id="advanced-info" className={isAdvancedMode ? "show-advanced" : ""}>
+					<p>Pressure: {mainInfo.pressure} hPa</p>
+					<p>Humidity: {mainInfo.humidity}%</p>
+					<p>Dew Point: {mainInfo.dew_point}°C</p>
+				</div>
+			</div>
             <div id="sun">
                 <span id="rise"><img src="src/assets/Sunrise.svg" alt="sunrise icon"/>{new Intl.DateTimeFormat(locale, timeOptions).format(new Date(mainInfo.sunrise*1000))}</span>
                 <span id="set"><img src="src/assets/Sundown.svg" alt="sundown icon"/>{new Intl.DateTimeFormat(locale, timeOptions).format(new Date(mainInfo.sunset*1000))}</span>

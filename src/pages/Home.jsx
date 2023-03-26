@@ -12,12 +12,13 @@ export default function HomePage() {
 	useFavicon(weatherData)
 	if (loading) {
 		return <div>Loading weather data...</div>;
+	} else {
+		return (
+			<div id="wrapper">
+				<Header location={readableLocation[0]}/>
+				<Core mainInfo={weatherData.current} hourly={weatherData.hourly} daily={weatherData.daily}/>
+				<Footer/>
+			</div>
+		);
 	}
-	return (
-		<div id="wrapper">
-			<Header location={readableLocation[0]}/>
-			<Core mainInfo={weatherData.current} hourly={weatherData.hourly} daily={weatherData.daily}/>
-			<Footer/>
-		</div>
-	);
 }

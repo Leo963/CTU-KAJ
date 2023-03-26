@@ -33,16 +33,16 @@ export default function TopInfo({mainInfo, isAdvancedMode}) {
     return (
         <section id="top-info">
 			<div id="extra">
-				<p>Temperature: {mainInfo.temp}°C</p>
+				<p>Temperature: {Math.round(mainInfo.temp)}°C</p>
 				<p>
-					Wind: {mainInfo.wind_speed} m/s{" "}
+					Wind: {Math.round(mainInfo.wind_speed)} m/s{" "}
 					{windDegreesToDirection(mainInfo.wind_deg)}
 				</p>
 				<div className="break"></div>
 				<div id="advanced-info" className={isAdvancedMode ? "show-advanced" : ""}>
 					<p>Pressure: {mainInfo.pressure} hPa</p>
 					<p>Humidity: {mainInfo.humidity}%</p>
-					<p>Dew Point: {mainInfo.dew_point}°C</p>
+					<p>Dew Point: {Math.round(mainInfo.dew_point)}°C</p>
 				</div>
 			</div>
             <div id="sun">

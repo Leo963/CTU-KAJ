@@ -31,14 +31,18 @@ export function WeatherProvider({ children }) {
 	}, [location]);
 
 	async function fetchReadableLocation(location) {
+		setLoading(true);
 		try {
 			const response = await fetch(
 				`https://weather-proxy.fireup.studio/geolocation?lat=${location.lat}&lon=${location.lon}`
 			);
 			const data = await response.json();
 			setReadableLocation(data)
+			console.log(data)
 		} catch (error) {
 			console.error(error);
+		} finally {
+			setLoading(false);
 		}
 	}
 
@@ -58,7 +62,7 @@ export function WeatherProvider({ children }) {
 		setLoading(true);
 		try {
 			const response = await fetch(
-				`https://weather-proxy.fireup.studio/weather?lat=${location.lat}&lon=${location.lon}&appid=${apiKey}&units=metric`
+				`https://weather-proxy.fireup.studio/weather?lat=${location.lat}&lon=${location.lon}`
 			);
 			const data = await response.json();
 			console.log(data)

@@ -10,7 +10,7 @@ export default function Core({mainInfo, hourly, daily}) {
     return (
         <article>
             <StatusBar isAdvancedMode={isAdvancedMode} setIsAdvancedMode={setIsAdvancedMode}/>
-            <h2>Feels like: {mainInfo.feels_like}°C</h2>
+            <h2>Feels like: {Math.round(mainInfo.feels_like)}°C</h2>
             <TopInfo mainInfo={mainInfo} isAdvancedMode={isAdvancedMode}/>
             <HourlyForecast hourly={hourly}/>
             <DailyForecast daily={daily}/>

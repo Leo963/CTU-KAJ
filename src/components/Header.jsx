@@ -12,10 +12,10 @@ export default function Header({location}) {
 		}, 1000);
 		return () => clearInterval(timer);
 	})
-    return (
-        <header>
-            <h1 id="Location">{location.name}, {regionNames.of(location.country)}</h1>
-            <h3 id="dateAndTime">{time}, {date}</h3>
-        </header>
-    );
+	return (
+		<header>
+			<h1 id="Location">{location.local_names[locale.substring(0, 2)] === undefined ? location.name : location.local_names[locale.substring(0, 2)]}, {regionNames.of(location.country)}</h1>
+			<h3 id="dateAndTime">{time}, {date}</h3>
+		</header>
+	);
 }

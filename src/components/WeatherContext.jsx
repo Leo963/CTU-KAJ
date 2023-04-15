@@ -7,7 +7,8 @@ export function WeatherProvider({ children }) {
 	const [location, setLocation] = useState(null);
 	const [readableLocation, setReadableLocation] = useState(null);
 	const [favoriteLocations, setFavoriteLocations] = useState([]);
-	const [loading, setLoading] = useState(true);
+	const [loadingWeather, setLoadingWeather] = useState(true);
+	const [loadingLocation, setLoadingLocation] = useState(true);
 
 	useEffect(() => {
 		getCurrentLocation();
@@ -31,7 +32,7 @@ export function WeatherProvider({ children }) {
 	}, [location]);
 
 	async function fetchReadableLocation(location) {
-		setLoading(true);
+		setLoadingLocation(true);
 		try {
 			const response = await fetch(
 				`https://weather-proxy.fireup.studio/geolocation?lat=${location.lat}&lon=${location.lon}`
@@ -42,7 +43,7 @@ export function WeatherProvider({ children }) {
 		} catch (error) {
 			console.error(error);
 		} finally {
-			setLoading(false);
+			setLoadingLocation(false);
 		}
 	}
 
@@ -59,18 +60,17 @@ export function WeatherProvider({ children }) {
 	}
 
 	async function fetchWeatherData(location) {
-		setLoading(true);
+		setLoadingWeather(true);
 		try {
 			const response = await fetch(
 				`https://weather-proxy.fireup.studio/weather?lat=${location.lat}&lon=${location.lon}`
 			);
 			const data = await response.json();
-			console.log(data)
 			setWeatherData(data);
 		} catch (error) {
 			console.error(error);
 		} finally {
-			setLoading(false);
+			setLoadingWeather(false);
 		}
 	}
 
@@ -89,13 +89,15 @@ export function WeatherProvider({ children }) {
 			value={{
 				weatherData,
 				location,
-				loading,
+				loadingWeather,
+				loadingLocation,
 				favoriteLocations,
 				addFavoriteLocation,
 				removeFavoriteLocation,
 				setLocation,
 				readableLocation,
-				setReadableLocation
+				setReadableLocation,
+				setLoadingLocation
 			}}
 		>
 			{children}

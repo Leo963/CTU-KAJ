@@ -5,13 +5,14 @@ import Core from "../components/Core.jsx";
 import "../styles/core.css";
 import WeatherContext from "../components/WeatherContext.jsx";
 import useFavicon from "../hooks/useFavicon.js";
+import LoadingSpinner from "../components/Loading.jsx";
 
 export default function HomePage() {
 
-	const { weatherData, loading, readableLocation } = useContext(WeatherContext)
+	const { weatherData, readableLocation, loadingLocation, loadingWeather } = useContext(WeatherContext)
 	useFavicon(weatherData)
-	if (loading) {
-		return <div>Loading weather data...</div>;
+	if (loadingLocation || loadingWeather) {
+		return <div id="loader"><LoadingSpinner/></div>;
 	} else {
 		return (
 			<div id="wrapper">

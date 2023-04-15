@@ -57,7 +57,7 @@ export default function WeatherGraph({rain}) {
 				}
 			},
 			y: {
-				display: false,
+				display: true,
 				beginAtZero: true,
 				grid: {
 					display: true,

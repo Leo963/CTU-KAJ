@@ -10,14 +10,14 @@ import LoadingSpinner from "../components/Loading.jsx";
 export default function HomePage() {
 
 	const { weatherData, readableLocation, loadingLocation, loadingWeather } = useContext(WeatherContext)
-	useFavicon(weatherData)
+	useFavicon(weatherData[0])
 	if (loadingLocation || loadingWeather) {
 		return <div id="loader"><LoadingSpinner/></div>;
 	} else {
 		return (
 			<div id="wrapper">
 				<Header location={readableLocation[0]}/>
-				<Core mainInfo={weatherData.current} hourly={weatherData.hourly} daily={weatherData.daily}/>
+				<Core mainInfo={weatherData[0].current} hourly={weatherData[0].hourly} daily={weatherData[0].daily}/>
 				<Footer/>
 			</div>
 		);

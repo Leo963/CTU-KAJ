@@ -5,7 +5,7 @@ export default function DailyForecast() {
 	const {weatherData} = useContext(WeatherContext)
 	return (
 		<section id="daily">
-			{weatherData.daily.map((day) => (
+			{weatherData[0].daily.map((day) => (
 				<div key={day.dt}>
 					<p>
 						{new Date(day.dt * 1000).toLocaleDateString([], {

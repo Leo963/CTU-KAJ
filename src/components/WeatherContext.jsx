@@ -3,7 +3,7 @@ import { createContext, useState, useEffect } from "react";
 const WeatherContext = createContext();
 
 export function WeatherProvider({ children }) {
-	const [weatherData, setWeatherData] = useState(null);
+	const [weatherData, setWeatherData] = useState([]);
 	const [location, setLocation] = useState(null);
 	const [readableLocation, setReadableLocation] = useState(null);
 	const [favoriteLocations, setFavoriteLocations] = useState([]);
@@ -12,19 +12,36 @@ export function WeatherProvider({ children }) {
 
 	useEffect(() => {
 		getCurrentLocation();
+		loadFavoriteLocations();
 	}, []);
 
 	useEffect(() => {
 		if (location) {
-			fetchWeatherData(location);
+			fetchWeatherData(location, 0);
 			fetchReadableLocation(location);
 		}
 	}, [location]);
 
 	useEffect(() => {
+		favoriteLocations.forEach((location, index) => {
+			fetchWeatherData(location, index + 1);
+		});
+	}, [favoriteLocations]);
+
+	useEffect(() => {
+		localStorage.setItem("favoriteLocations", JSON.stringify(favoriteLocations));
+	}, [favoriteLocations]);
+
+	useEffect(() => {
 		const interval = setInterval(() => {
-			if (navigator.onLine && location) {
-				fetchWeatherData(location);
+
+			if (navigator.onLine) {
+				if (location)
+					fetchWeatherData(location, 0);
+				favoriteLocations.forEach((location, index) => {
+					if (navigator.onLine)
+						fetchWeatherData(location, index + 1);
+				})
 			}
 		}, 300000); // 5 minutes in milliseconds
 
@@ -59,14 +76,18 @@ export function WeatherProvider({ children }) {
 		}
 	}
 
-	async function fetchWeatherData(location) {
+	async function fetchWeatherData(location, index) {
 		setLoadingWeather(true);
 		try {
 			const response = await fetch(
 				`https://weather-proxy.fireup.studio/weather?lat=${location.lat}&lon=${location.lon}`
 			);
 			const data = await response.json();
-			setWeatherData(data);
+			setWeatherData((prevWeatherData) => {
+				const newWeatherData = [...prevWeatherData];
+				newWeatherData[index] = data;
+				return newWeatherData;
+			});
 		} catch (error) {
 			console.error(error);
 		} finally {
@@ -82,6 +103,13 @@ export function WeatherProvider({ children }) {
 		setFavoriteLocations((prevLocations) =>
 			prevLocations.filter((l) => l !== location)
 		);
+	}
+
+	function loadFavoriteLocations() {
+		const storedLocations = JSON.parse(localStorage.getItem("favoriteLocations"));
+		if (storedLocations) {
+			setFavoriteLocations(storedLocations);
+		}
 	}
 
 	return (

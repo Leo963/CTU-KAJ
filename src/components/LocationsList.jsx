@@ -8,16 +8,17 @@ export default function LocationsList() {
 	const [favoriteLocations, setFavoriteLocations] = useState([]);
 	const [modalOpen, setModalOpen] = useState(false);
 	const [newLocation, setNewLocation] = useState("");
-	const [loadedLocation, setLoadedLocation] = useState(null);
+	const [loadedLocation, setLoadedLocation] = useState([]);
 
 	async function fetchLocation(location) {
 		setLoadingLocation(true);
 		try {
 			const response = await fetch(
-				`http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=5&appid=`
+				`https://weather-proxy.fireup.studio/fulllocation?location=${location}`
 			);
 			const data = await response.json();
 			setLoadedLocation(data)
+			console.log(loadedLocation)
 		} catch (error) {
 			console.error(error);
 		} finally {
@@ -25,14 +26,10 @@ export default function LocationsList() {
 		}
 	}
 	function handleAddFavorite() {
-		if (newLocation.trim()) {
-			console.log(newLocation)
-			fetchLocation(newLocation)
-			console.log(loadedLocation)
-			setFavoriteLocations([...favoriteLocations, loadedLocation]);
-			console.log(loadedLocation)
-			localStorage.setItem("favoriteLocations", JSON.stringify([...favoriteLocations, loadedLocation]));
-			setNewLocation("");
+		if (newLocation) {
+			fetchLocation(newLocation);
+			setModalOpen(false);
+
 		}
 	}
 
@@ -47,9 +44,9 @@ export default function LocationsList() {
 	return (
 		<div id="locations-container">
 			<ul>
-				<ListItem key={-1} weather={weatherData} location={readableLocation[0]}/>
+				<ListItem key={0} weather={weatherData[0]} location={readableLocation[0]}/>
 				{favoriteLocations.map((location, index) => (
-					<ListItem key={index} location={location}/>
+					<ListItem key={index+1} location={location}/>
 				))}
 			</ul>
 			<footer className="locations-list-footer">
@@ -66,13 +63,14 @@ export default function LocationsList() {
 						<h2>Add a new favorite location</h2>
 						<input
 							type="text"
-							placeholder="Enter location"
+							placeholder="Enter location i.e. New York or London"
 							value={newLocation}
 							onChange={(e) => setNewLocation(e.target.value)}
+							onSubmit={() => handleAddFavorite()}
 						/>
 						<div className="modal-buttons">
-							<button onClick={() => {}}>Add</button>
 							<button onClick={() => setModalOpen(false)}>Cancel</button>
+							<button onClick={() => handleAddFavorite()}>Add</button>
 						</div>
 					</div>
 				</div>

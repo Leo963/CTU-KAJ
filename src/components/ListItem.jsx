@@ -15,7 +15,7 @@ export default function ListItem({weather, location}) {
 				<h2>{location.name}</h2>
 			</div>
 			<div id="location-weather">
-				<h2>{weather.current.temp}°C</h2>
+				<h2>{Math.round(weather.current.temp)}°C</h2>
 			</div>
 			<div className="list-item-actions">
 				<button onClick={handleDelete}>

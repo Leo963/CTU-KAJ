@@ -36,6 +36,7 @@ header {
 	background-color: var(--top-header);
 	color: white;
 	padding: 10px 40px;
+	z-index: 1;
 }
 
 header > h1 {
@@ -205,6 +206,8 @@ section#location-list > img {
 	cursor: pointer;
 	width: 100%;
 	max-height: 65px;
+	min-height: 35px;
+	min-width: 35px;
 }
 
 div#locations {
@@ -411,3 +414,45 @@ button:hover {
 	justify-content: flex-end;
 	margin-top: 20px;
 }
+
+@media screen and (max-width: 750px) {
+	div#wrapper {
+		width: 100vw;
+		min-width: 375px;
+	}
+	header h1 {
+		font-size: 2rem;
+	}
+	h3#dateAndTime {
+		display: none;
+	}
+
+	article {
+		padding: 10px 20px;
+	}
+
+	div#lod, div#status-indicator {
+		margin-top: 0;
+		scale: 0.8;
+	}
+
+	section#hourly {
+		margin: 0 -20px;
+	}
+
+	section#time p:nth-child(n+8), section#icons img:nth-child(n+8), section#temps p:nth-child(n+8), section#winds p:nth-child(n+8), section#daily div:nth-child(n+8) {
+		display: none;
+	}
+
+	a.location-list-btn > svg {
+		width: 40px;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	section#time p:nth-child(n+5), section#icons img:nth-child(n+5), section#temps p:nth-child(n+5), section#winds p:nth-child(n+5), section#daily div:nth-child(n+5) {
+		display: none;
+	}
+}
+
+

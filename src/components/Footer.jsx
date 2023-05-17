@@ -23,6 +23,7 @@ export default function Footer() {
 				<img
 					src="src/assets/right-arrow.svg"
 					id="prev"
+					alt="previous arrow"
 					onClick={() => handleArrowClick("prev")}
 				/>
 				<div id="locations">
@@ -49,6 +50,7 @@ export default function Footer() {
 				<img
 					src="src/assets/right-arrow.svg"
 					id="next"
+					alt="next arrow"
 					onClick={() => handleArrowClick("next")}
 				/>
 			</section>

@@ -9,15 +9,15 @@ import LoadingSpinner from "../components/Loading.jsx";
 
 export default function HomePage() {
 
-	const { weatherData, readableLocation, loadingLocation, loadingWeather } = useContext(WeatherContext)
+	const { weatherData, readableLocation, loadingLocation, loadingWeather, currentLocationIndex, favoriteLocations } = useContext(WeatherContext)
 	useFavicon(weatherData[0])
 	if (loadingLocation || loadingWeather) {
 		return <div id="loader"><LoadingSpinner/></div>;
 	} else {
 		return (
 			<div id="wrapper">
-				<Header location={readableLocation[0]}/>
-				<Core mainInfo={weatherData[0].current} hourly={weatherData[0].hourly} daily={weatherData[0].daily}/>
+				<Header location={ currentLocationIndex === 0 ? readableLocation[0] : favoriteLocations[currentLocationIndex-1]}/>
+				<Core mainInfo={weatherData[currentLocationIndex].current} hourly={weatherData[currentLocationIndex].hourly} daily={weatherData[currentLocationIndex].daily}/>
 				<Footer/>
 			</div>
 		);

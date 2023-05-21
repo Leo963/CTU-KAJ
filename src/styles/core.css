@@ -8,14 +8,14 @@ body {
 	margin: 0;
 	display: grid;
 	justify-items: center;
-	background-color: silver;
-	background-attachment: fixed;
-	background-image: linear-gradient(335deg, #b00 23px, transparent 23px),
-	linear-gradient(155deg, #d00 23px, transparent 23px),
-	linear-gradient(335deg, #b00 23px, transparent 23px),
-	linear-gradient(155deg, #d00 23px, transparent 23px);
-	background-size: 58px 58px;
-	background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
+	/*background-color: silver;*/
+	/*background-attachment: fixed;*/
+	/*background-image: linear-gradient(335deg, #b00 23px, transparent 23px),*/
+	/*linear-gradient(155deg, #d00 23px, transparent 23px),*/
+	/*linear-gradient(335deg, #b00 23px, transparent 23px),*/
+	/*linear-gradient(155deg, #d00 23px, transparent 23px);*/
+	/*background-size: 58px 58px;*/
+	/*background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;*/
 }
 
 @media (prefers-color-scheme: dark) {
@@ -279,8 +279,10 @@ div#loader {
 
 .location-icon {
 	display: inline-block;
-	width: 10px;
-	height: 10px;
+	min-width: 10px;
+	min-height: 10px;
+	width: 30px;
+	height: 30px;
 	margin: 0 5px;
 }
 
@@ -420,6 +422,11 @@ button:hover {
 	padding: 10px;
 	border: 1px solid #ccc;
 	border-radius: 4px;
+}
+
+li.list-item {
+	margin: 10px 0;
+	border-radius: 5px;
 }
 
 @media screen and (max-width: 750px) {

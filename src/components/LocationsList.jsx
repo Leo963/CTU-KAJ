@@ -4,49 +4,37 @@ import WeatherContext from "./WeatherContext.jsx";
 import {Link} from "react-router-dom";
 
 export default function LocationsList() {
-	const {readableLocation, weatherData, setLoadingLocation} = useContext(WeatherContext);
-	const [favoriteLocations, setFavoriteLocations] = useState([]);
+	const {readableLocation, weatherData, addFavoriteLocation, favoriteLocations, favoriteLoading} = useContext(WeatherContext);
 	const [modalOpen, setModalOpen] = useState(false);
 	const [newLocation, setNewLocation] = useState("");
-	const [loadedLocation, setLoadedLocation] = useState([]);
 
 	async function fetchLocation(location) {
-		setLoadingLocation(true);
+		// setLoadingLocation(true);
 		try {
 			const response = await fetch(
 				`https://weather-proxy.fireup.studio/fulllocation?location=${location}`
 			);
 			const data = await response.json();
-			setLoadedLocation(data)
-			console.log(loadedLocation)
+			addFavoriteLocation(data[0]);
 		} catch (error) {
 			console.error(error);
 		} finally {
-			setLoadingLocation(false);
+			// setLoadingLocation(false);
 		}
 	}
-	function handleAddFavorite() {
+	async function handleAddFavorite() {
 		if (newLocation) {
-			fetchLocation(newLocation);
+			await fetchLocation(newLocation);
 			setModalOpen(false);
-
 		}
 	}
-
-
-	useEffect(() => {
-		const storedLocations = localStorage.getItem('favoriteLocations');
-		if (storedLocations) {
-			setFavoriteLocations(JSON.parse(storedLocations));
-		}
-	}, []);
 
 	return (
 		<div id="locations-container">
 			<ul>
 				<ListItem key={0} weather={weatherData[0]} location={readableLocation[0]}/>
-				{favoriteLocations.map((location, index) => (
-					<ListItem key={index+1} location={location}/>
+				{!favoriteLoading && favoriteLocations.map((location, index) => (
+					<ListItem key={index+1} index={index} weather={weatherData[index+1]} location={location}/>
 				))}
 			</ul>
 			<footer className="locations-list-footer">

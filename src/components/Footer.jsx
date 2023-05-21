@@ -1,9 +1,10 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {Link} from "react-router-dom";
+import WeatherContext from "./WeatherContext.jsx";
 
 export default function Footer() {
-	let favoriteLocations = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-	const [currentLocationIndex, setCurrentLocationIndex] = useState(0);
+	const {favoriteLocations, currentLocationIndex, setCurrentLocationIndex} = useContext(WeatherContext)
+
 
 	const handleArrowClick = (direction) => {
 		if (direction === "prev") {

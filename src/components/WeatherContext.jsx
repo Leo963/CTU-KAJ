@@ -9,6 +9,8 @@ export function WeatherProvider({ children }) {
 	const [favoriteLocations, setFavoriteLocations] = useState([]);
 	const [loadingWeather, setLoadingWeather] = useState(true);
 	const [loadingLocation, setLoadingLocation] = useState(true);
+	const [favoriteLoading, setFavoriteLoading] = useState(false);
+	const [currentLocationIndex, setCurrentLocationIndex] = useState(0);
 
 	useEffect(() => {
 		getCurrentLocation();
@@ -23,13 +25,19 @@ export function WeatherProvider({ children }) {
 	}, [location]);
 
 	useEffect(() => {
+		let promiseList = [];
 		favoriteLocations.forEach((location, index) => {
-			fetchWeatherData(location, index + 1);
+			promiseList.push(fetchWeatherData(location, index + 1));
 		});
+		Promise.all(promiseList).then(() => {
+			setFavoriteLoading(false);
+		})
+
 	}, [favoriteLocations]);
 
 	useEffect(() => {
-		localStorage.setItem("favoriteLocations", JSON.stringify(favoriteLocations));
+		if (favoriteLocations.length > 0)
+			localStorage.setItem("favoriteLocations", JSON.stringify(favoriteLocations));
 	}, [favoriteLocations]);
 
 	useEffect(() => {
@@ -42,6 +50,7 @@ export function WeatherProvider({ children }) {
 					if (navigator.onLine)
 						fetchWeatherData(location, index + 1);
 				})
+				setFavoriteLoading(false);
 			}
 		}, 300000); // 5 minutes in milliseconds
 
@@ -97,6 +106,7 @@ export function WeatherProvider({ children }) {
 
 	function addFavoriteLocation(location) {
 		setFavoriteLocations((prevLocations) => [...prevLocations, location]);
+		setFavoriteLoading(true);
 	}
 
 	function removeFavoriteLocation(location) {
@@ -125,7 +135,10 @@ export function WeatherProvider({ children }) {
 				setLocation,
 				readableLocation,
 				setReadableLocation,
-				setLoadingLocation
+				setLoadingLocation,
+				favoriteLoading,
+				currentLocationIndex,
+				setCurrentLocationIndex
 			}}
 		>
 			{children}

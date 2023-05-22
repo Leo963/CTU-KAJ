@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import Header from "../components/Header.jsx";
 import Footer from "../components/Footer.jsx";
 import Core from "../components/Core.jsx";
@@ -9,8 +9,8 @@ import LoadingSpinner from "../components/Loading.jsx";
 
 export default function HomePage() {
 
-	const { weatherData, readableLocation, loadingLocation, loadingWeather, currentLocationIndex, favoriteLocations } = useContext(WeatherContext)
-	useFavicon(weatherData[0])
+	const { weatherData, readableLocation, loadingLocation, loadingWeather, currentLocationIndex, favoriteLocations, setCurrentLocationIndex } = useContext(WeatherContext)
+	useFavicon(weatherData[currentLocationIndex])
 	if (loadingLocation || loadingWeather) {
 		return <div id="loader"><LoadingSpinner/></div>;
 	} else {

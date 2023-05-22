@@ -4,7 +4,7 @@ import WeatherContext from "./WeatherContext.jsx";
 import {Link} from "react-router-dom";
 
 export default function LocationsList() {
-	const {readableLocation, weatherData, addFavoriteLocation, favoriteLocations, favoriteLoading} = useContext(WeatherContext);
+	const {readableLocation, weatherData, addFavoriteLocation, favoriteLocations, favoriteLoading, setCurrentLocationIndex} = useContext(WeatherContext);
 	const [modalOpen, setModalOpen] = useState(false);
 	const [newLocation, setNewLocation] = useState("");
 
@@ -15,6 +15,11 @@ export default function LocationsList() {
 				`https://weather-proxy.fireup.studio/fulllocation?location=${location}`
 			);
 			const data = await response.json();
+			if (data.length === 0) {
+				alert(`Input "${location}" not found`);
+				setNewLocation("")
+				return;
+			}
 			addFavoriteLocation(data[0]);
 		} catch (error) {
 			console.error(error);
@@ -29,16 +34,25 @@ export default function LocationsList() {
 		}
 	}
 
+	function closeModal() {
+		setModalOpen(false);
+		setNewLocation("");
+	}
+
+	function clearIndex() {
+		setCurrentLocationIndex(0);
+	}
+
 	return (
 		<div id="locations-container">
 			<ul>
-				<ListItem key={0} weather={weatherData[0]} location={readableLocation[0]}/>
+				<ListItem key={0} weather={weatherData[0]} location={readableLocation[0]} index={-1}/>
 				{!favoriteLoading && favoriteLocations.map((location, index) => (
 					<ListItem key={index+1} index={index} weather={weatherData[index+1]} location={location}/>
 				))}
 			</ul>
 			<footer className="locations-list-footer">
-				<Link to={"/"} className="go-back-btn">
+				<Link to={"/"} onClick={clearIndex} className="go-back-btn">
 					Back to Home
 				</Link>
 				<button className="add-favorite-btn" onClick={() => setModalOpen(true)}>
@@ -57,7 +71,7 @@ export default function LocationsList() {
 							onSubmit={() => handleAddFavorite()}
 						/>
 						<div className="modal-buttons">
-							<button onClick={() => setModalOpen(false)}>Cancel</button>
+							<button onClick={() => closeModal()}>Cancel</button>
 							<button onClick={() => handleAddFavorite()}>Add</button>
 						</div>
 					</div>

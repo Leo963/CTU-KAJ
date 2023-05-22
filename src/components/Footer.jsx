@@ -21,6 +21,7 @@ export default function Footer() {
 		<nav>
 			<div></div>
 			<section id="location-list">
+				<h2>Icons of saved locations</h2>
 				<img
 					src="src/assets/right-arrow.svg"
 					id="prev"

@@ -36,7 +36,7 @@ export function WeatherProvider({ children }) {
 	}, [favoriteLocations]);
 
 	useEffect(() => {
-		if (favoriteLocations.length > 0)
+		// if (favoriteLocations.length > 0)
 			localStorage.setItem("favoriteLocations", JSON.stringify(favoriteLocations));
 	}, [favoriteLocations]);
 
@@ -110,9 +110,13 @@ export function WeatherProvider({ children }) {
 	}
 
 	function removeFavoriteLocation(location) {
-		setFavoriteLocations((prevLocations) =>
-			prevLocations.filter((l) => l !== location)
-		);
+		if (favoriteLocations.length === 1) {
+			setFavoriteLocations([]);
+		} else {
+			setFavoriteLocations((prevLocations) =>
+				prevLocations.filter((l) => l !== location)
+			);
+		}
 	}
 
 	function loadFavoriteLocations() {

@@ -32,6 +32,7 @@ export default function TopInfo({mainInfo, isAdvancedMode}) {
 	const {timeOptions, locale} = useContext(ConfigContext)
     return (
         <section id="top-info">
+			<h2>Temperature information</h2>
 			<div id="extra">
 				<p>Temperature: {Math.round(mainInfo.temp)}°C</p>
 				<p>

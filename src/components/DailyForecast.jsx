@@ -1,11 +1,11 @@
 import React, {useContext} from 'react';
 import WeatherContext from "./WeatherContext.jsx";
 
-export default function DailyForecast() {
-	const {weatherData} = useContext(WeatherContext)
+export default function DailyForecast({daily}) {
 	return (
 		<section id="daily">
-			{weatherData[0].daily.map((day) => (
+			<h2>Forecast for next few days</h2>
+			{daily.map((day) => (
 				<div key={day.dt}>
 					<p>
 						{new Date(day.dt * 1000).toLocaleDateString([], {

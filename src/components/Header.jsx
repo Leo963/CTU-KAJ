@@ -14,7 +14,9 @@ export default function Header({location}) {
 	})
 	return (
 		<header>
-			<h1 id="Location">{location.local_names[locale.substring(0, 2)] === undefined ? location.name : location.local_names[locale.substring(0, 2)]}, {regionNames.of(location.country)}</h1>
+			<h1 id="Location">{
+				location.local_names === undefined ? location.name : location.local_names[locale.substring(0, 2)] === undefined ? location.name : location.local_names[locale.substring(0, 2)]}, {regionNames.of(location.country)}
+			</h1>
 			<h3 id="dateAndTime">{time}, {date}</h3>
 		</header>
 	);

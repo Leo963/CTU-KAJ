@@ -70,6 +70,7 @@ export function WeatherProvider({ children }) {
 			console.error(error);
 		} finally {
 			setLoadingLocation(false);
+
 		}
 	}
 
@@ -142,7 +143,7 @@ export function WeatherProvider({ children }) {
 				setLoadingLocation,
 				favoriteLoading,
 				currentLocationIndex,
-				setCurrentLocationIndex
+				setCurrentLocationIndex,
 			}}
 		>
 			{children}

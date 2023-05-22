@@ -14,12 +14,15 @@ export default function HomePage() {
 	if (loadingLocation || loadingWeather) {
 		return <div id="loader"><LoadingSpinner/></div>;
 	} else {
-		return (
-			<div id="wrapper">
-				<Header location={ currentLocationIndex === 0 ? readableLocation[0] : favoriteLocations[currentLocationIndex-1]}/>
-				<Core mainInfo={weatherData[currentLocationIndex].current} hourly={weatherData[currentLocationIndex].hourly} daily={weatherData[currentLocationIndex].daily}/>
-				<Footer/>
-			</div>
-		);
+			return (
+				<div id="wrapper">
+					<Header
+						location={currentLocationIndex === 0 ? readableLocation[0] : favoriteLocations[currentLocationIndex - 1]}/>
+					<Core mainInfo={weatherData[currentLocationIndex].current}
+						  hourly={weatherData[currentLocationIndex].hourly}
+						  daily={weatherData[currentLocationIndex].daily}/>
+					<Footer/>
+				</div>
+			);
 	}
 }

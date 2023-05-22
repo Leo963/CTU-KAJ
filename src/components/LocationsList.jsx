@@ -28,9 +28,12 @@ export default function LocationsList() {
 		}
 	}
 	async function handleAddFavorite() {
-		if (newLocation) {
+		if (newLocation.trim()) {
 			await fetchLocation(newLocation);
 			setModalOpen(false);
+		} else {
+			setNewLocation("")
+			alert("Please enter a valid location not just whitespace")
 		}
 	}
 

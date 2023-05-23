@@ -118,6 +118,7 @@ export function WeatherProvider({ children }) {
         (error) => {
           console.error(error);
           setGeoDisabled(true);
+		  setLoadingLocation(false)
         }
       );
     } else {

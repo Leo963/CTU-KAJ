@@ -1,4 +1,4 @@
-// src/hooks/useFavicon.js
+// This hook sets the favicon of the page to the current weather icon from OpenWeatherMap API
 import { useEffect } from "react";
 
 function useFavicon(weather) {

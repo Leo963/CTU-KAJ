@@ -8,8 +8,12 @@ export default function LocationsList() {
 	const [modalOpen, setModalOpen] = useState(false);
 	const [newLocation, setNewLocation] = useState("");
 
+	/**
+	 * This function fetches the location data for a given location string and adds it to the favorite locations list
+	 * @param {string} location - The location string to fetch data for
+	 * @returns {void}
+	 */
 	async function fetchLocation(location) {
-		// setLoadingLocation(true);
 		try {
 			const response = await fetch(
 				`https://weather-proxy.fireup.studio/fulllocation?location=${location}`
@@ -23,10 +27,12 @@ export default function LocationsList() {
 			addFavoriteLocation(data[0]);
 		} catch (error) {
 			console.error(error);
-		} finally {
-			// setLoadingLocation(false);
 		}
 	}
+
+	/**
+	 * This function handles the click event of the "Add Favorite" button and fetches the location data for the new location string
+	 */
 	async function handleAddFavorite() {
 		if (newLocation.trim()) {
 			await fetchLocation(newLocation);

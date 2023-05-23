@@ -5,7 +5,10 @@ import WeatherContext from "./WeatherContext.jsx";
 export default function Footer() {
 	const {favoriteLocations, currentLocationIndex, setCurrentLocationIndex} = useContext(WeatherContext)
 
-
+	/**
+	 * This function handles the click event of the arrow buttons and updates the current location index accordingly
+	 * @param {string} direction - The direction of the arrow button ("prev" or "next")
+	 */
 	const handleArrowClick = (direction) => {
 		if (direction === "prev") {
 			setCurrentLocationIndex((prevIndex) =>

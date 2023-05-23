@@ -434,6 +434,20 @@ section > h2 {
 	display: none;
 }
 
+div#geo-disabled {
+	background-color: #6db1bf;
+	padding: 20px;
+	border-radius: 20px;
+}
+
+div#root {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100svh;
+}
+
 @media screen and (max-width: 750px) {
 	div#wrapper {
 		width: 100vw;

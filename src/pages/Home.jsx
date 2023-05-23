@@ -9,11 +9,19 @@ import LoadingSpinner from "../components/Loading.jsx";
 
 export default function HomePage() {
 
-	const { weatherData, readableLocation, loadingLocation, loadingWeather, currentLocationIndex, favoriteLocations, setCurrentLocationIndex } = useContext(WeatherContext)
+	const { weatherData, readableLocation, loadingLocation, loadingWeather, currentLocationIndex, favoriteLocations, geoDisabled } = useContext(WeatherContext)
 	useFavicon(weatherData[currentLocationIndex])
 	if (loadingLocation || loadingWeather) {
 		return <div id="loader"><LoadingSpinner/></div>;
 	} else {
+		if (geoDisabled) {
+			return (
+				<div id="geo-disabled">
+					<h2>Geolocation is disabled or not supported</h2>
+					<p>Enable geolocation in your browser to use this feature</p>
+				</div>
+			)
+		} else {
 			return (
 				<div id="wrapper">
 					<Header
@@ -24,5 +32,6 @@ export default function HomePage() {
 					<Footer/>
 				</div>
 			);
+		}
 	}
 }

@@ -1,8 +1,8 @@
-import { createContext, useState, useEffect } from "react";
+import {createContext, useState, useEffect} from "react";
 
 const WeatherContext = createContext();
 
-export function WeatherProvider({ children }) {
+export function WeatherProvider({children}) {
 	const [weatherData, setWeatherData] = useState([]);
 	const [location, setLocation] = useState(null);
 	const [readableLocation, setReadableLocation] = useState(null);
@@ -11,6 +11,7 @@ export function WeatherProvider({ children }) {
 	const [loadingLocation, setLoadingLocation] = useState(true);
 	const [favoriteLoading, setFavoriteLoading] = useState(false);
 	const [currentLocationIndex, setCurrentLocationIndex] = useState(0);
+	const [geoDisabled, setGeoDisabled] = useState(false);
 
 	useEffect(() => {
 		getCurrentLocation();
@@ -37,7 +38,7 @@ export function WeatherProvider({ children }) {
 
 	useEffect(() => {
 		// if (favoriteLocations.length > 0)
-			localStorage.setItem("favoriteLocations", JSON.stringify(favoriteLocations));
+		localStorage.setItem("favoriteLocations", JSON.stringify(favoriteLocations));
 	}, [favoriteLocations]);
 
 	useEffect(() => {
@@ -82,7 +83,13 @@ export function WeatherProvider({ children }) {
 					lat: position.coords.latitude,
 					lon: position.coords.longitude,
 				});
+			}, (error) => {
+				setGeoDisabled(true);
+				setLoadingLocation(false)
 			});
+		} else {
+			setGeoDisabled(true);
+			setLoadingLocation(false)
 		}
 	}
 
@@ -144,6 +151,7 @@ export function WeatherProvider({ children }) {
 				favoriteLoading,
 				currentLocationIndex,
 				setCurrentLocationIndex,
+				geoDisabled
 			}}
 		>
 			{children}
